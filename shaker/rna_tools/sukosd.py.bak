@@ -133,7 +133,7 @@ def sukosd(dotbracket):
 def predict_Suko(sequence,seq_to_db_function= rnasubopt):
     db_list = seq_to_db_function(sequence)
     struct_proba = ss.probabilities_of_structures(sequence, db_list)
-    structures, weights = list(zip(*struct_proba))
+    structures, weights = zip(*struct_proba)
     shapes_Suko = [sukosd(x) for x in db_list]
     return ss.weighted_average(weights, shapes_Suko)
 
@@ -142,7 +142,7 @@ def predict_Suko(sequence,seq_to_db_function= rnasubopt):
 def predict_tmp(sequence,seq_to_db_function= rnasubopt):
     db_list = seq_to_db_function(sequence)
     struct_proba = ss.probabilities_of_structures(sequence, db_list)
-    structures, weights = list(zip(*struct_proba))
+    structures, weights = zip(*struct_proba)
     shapes = [ np.array([ 1.0 if chr == "." else 0.0 for chr in x ]) for x in db_list]
     return ss.weighted_average(weights, shapes)
 

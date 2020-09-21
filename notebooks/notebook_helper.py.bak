@@ -53,7 +53,7 @@ def draw_seq_rea(sequence, react_list, stru=None, **kwargs):
     if stru != None:
         brack = stru
     else:
-        print("FIXME, i should use rnafold here")
+        print "FIXME, i should use rnafold here"
         brack = rna_tools.shape(sequence)[0][0]
     graph = util.sequence_dotbracket_to_graph(sequence,brack)
     graph.graph['structure']= brack
@@ -118,7 +118,7 @@ def get_genetrack(sequencename, data, genestartdict, low=0.1, high = 0.2):
 
     genetrack = [low]*length
     for start, end in genes:
-        print(start,end)
+        print start,end
         for e in range(start,end):
             genetrack[e] = high
     return genetrack
@@ -177,7 +177,7 @@ def get_genetrack_multigene(sequencename, data, genestartdict, drawindex=(0,9999
 
 
 def get_test_data():
-    print("removed get_test_data")
+    print "removed get_test_data"
     '''
     data = rna_io.get_all_data('../data/RNA16.react', '../data/RNA16.dbn')
     #data2 = ss.get_all_data('data/RNA20.react','data/RNA20.dbn')
@@ -192,7 +192,7 @@ def get_test_data():
     '''
 
 def get_train_data():
-    print("removed get train data")
+    print "removed get train data"
     return get_test_data()
 
 
@@ -203,7 +203,7 @@ def run(rs_model=False,rs_structure=True, filename='' , maxstruct_train=3, maxst
     data=get_test_data()
     res=[]
     for e in data:
-        train = list(data.keys())
+        train = data.keys()
         train.remove(e)
         if rs_model:
             model = sn.make_model(data,train,maxstruct=maxstruct_train)
@@ -218,7 +218,7 @@ def run(rs_model=False,rs_structure=True, filename='' , maxstruct_train=3, maxst
         else:
             my_react = np.array(ss.predict2(model,target_sequence,target_struct))
 
-        print('x', end=' ')
+        print 'x',
         res.append(">%s"%e)
         res.append('\n'.join(["%s\t%.4f" % (i,e) for i,e in enumerate(my_react)]))
         res.append('')
@@ -245,7 +245,7 @@ def run2(rs_structure=True, filename='' ,  maxstruct_predict=3, train_data=None,
 
     res=[]
     for e in test_data:
-        train = list(train_data.keys())
+        train = train_data.keys()
         if e in train: train.remove(e)
         model = ss.make_model(train_data,train)
 
@@ -257,7 +257,7 @@ def run2(rs_structure=True, filename='' ,  maxstruct_predict=3, train_data=None,
         else:
             my_react = np.array(ss.predict2(model,target_sequence,target_struct))
 
-        print('x', end=' ')
+        print 'x',
         res.append(">%s"%e)
         res.append('\n'.join(["%s\t%.4f" % (i,e) for i,e in enumerate(my_react)]))
         res.append('')

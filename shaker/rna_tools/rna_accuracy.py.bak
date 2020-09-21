@@ -1,5 +1,5 @@
 
-from . import rnaplfold
+import rnaplfold
 import os, re
 import numpy as np
 

@@ -1,4 +1,4 @@
-from .util import shexec
+from util import shexec
 import re
 
 
@@ -8,7 +8,7 @@ def rnashapes(sequence, return_energy=False):
 
     #retcode,err,out = shexec("RNAshapes -u -s -t 5 -c 10 %s | sort -n " % sequence)
     if retcode != 0:
-        print("RNAshapes failed")
+        print "RNAshapes failed"
         return
 
     energy = re.findall(r"[-+]?[0-9]*\.?[0-9]+",out)

@@ -12,9 +12,9 @@ def getdata(typ):
 typee = 'incell'
 data= getdata(typee)
 
-keys = list(data.keys())# 3 for testing
+keys = data.keys()# 3 for testing
 res = sim.crosspredict_nfold(data, keys,model=sim.make_xgbreg())
 
-res = dict(list(zip(keys,res)))
+res = dict(zip(keys,res))
 rio.dump_shape(res,"%s_predicted.react" % typee)
 

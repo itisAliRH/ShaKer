@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 DEBUG = True
 if DEBUG:
-    print 'argparse args: ', args
+    print('argparse args: ', args)
 
 
 
@@ -48,18 +48,18 @@ def dump_fasta(se,dp,stringname):
     textlist = [">%s\n%s\n%s\n\n" % (s.strip(),d.strip(),n.strip())  for (s,d,n) in zip(stringname,se,dp)]
     res =  ''.join(textlist)
     dump("data.dbn",res)
-    print res
+    print(res)
 
 def dump_shape(shape,fname):
-    print shape
+    print(shape)
     fnames = [ e[:e.find(".")] for e in fname ]
     fix_data = lambda x: "\n".join([ str(i+1)+"\t"+e.strip() for i,e in enumerate( x.split("\n") ) if e.strip()>0  ])
-    dataz = map(fix_data, shape)
+    dataz = list(map(fix_data, shape))
     textlist = [">%s\n%s\n\n" % (name,data)  for (name,data) in zip(fnames,dataz)]
     res = ''.join(textlist)
     res = res.replace("-999","NA")
     dump("data.react",res)
-    print res
+    print(res)
 
 
 dump_fasta(seqs,bpseq,_)

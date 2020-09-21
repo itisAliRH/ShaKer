@@ -23,8 +23,8 @@ def run_access_old(data, keys):
     
     index= ['shaker', 'default']
     data = [corr_shaker,corr_default]
-    list(map(lambda x:x.append(np.mean(x)),data))
-    print(pandas.DataFrame(data, columns=keys+['mean'], index=index).T)
+    map(lambda x:x.append(np.mean(x)),data)
+    print pandas.DataFrame(data, columns=keys+['mean'], index=index).T
     
 
 
@@ -33,10 +33,10 @@ def run_access(data, keys,make_model=lambda: ss.make_xgbreg()):
 
 
     def get_str(seq):
-	for _, data_seq, db in list(data.values()):
+	for _, data_seq, db in data.values():
 	    if seq == data_seq:
 		return [db]
-	print("SHIT")
+	print "SHIT"
 
     predictions = { k:(data[k][1],v) for v,k  in zip(  ss.crosspredict_nfold(data,keys,model=make_model()) , keys) }
     predictions_str = { k:(data[k][1],v) for v,k in zip(  ss.crosspredict_nfold(data,keys,seq_to_db_function=get_str, model=make_model()) , keys)}
@@ -55,14 +55,14 @@ def run_access(data, keys,make_model=lambda: ss.make_xgbreg()):
     corr_spear = lambda ac1:[spear(ac1[k], acc_shape[k])[0] for k in keys]
     corr_pear = lambda ac1:[pear(ac1[k], acc_shape[k])[0] for k in keys]
 
-    data_spear = list(map(corr_spear, access_data))
-    data_pear = list(map(corr_pear, access_data))
+    data_spear = map(corr_spear, access_data)
+    data_pear = map(corr_pear, access_data)
 
 
-    ress = [np.mean(x) for x in data_spear]
-    resp=  [np.mean(x) for x in data_pear]
+    ress = map(lambda x:np.mean(x),data_spear)
+    resp=  map(lambda x:np.mean(x),data_pear)
 
-    print(ress, resp) 
+    print ress, resp 
     return "{}\n{} spear\n{} pear".format(index,ress ,resp)
 
     #map(lambda x:x.append(np.mean(x)),data)
@@ -92,7 +92,7 @@ tasks = [(ty,mo) for ty in types for mo in models ]
 def run(id):
     datum , mod = tasks[id]
     data= getdata(datum)
-    keys=list(data.keys())[:9]
+    keys=data.keys()[:9]
     ret = run_access(data,keys,make_model=mod)
     with open("%d.access.out" % id, "w") as f: f.write(ret)
 

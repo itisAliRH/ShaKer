@@ -9,7 +9,7 @@ def getdata():
 data = getdata() 
 
 
-k = list(data.keys())
+k = data.keys()
 
 import sys
 import ShaKer.rna_tools.rnasubopt as so
@@ -36,7 +36,7 @@ for i,e in enumerate(k):
                 if len(s)> 3:
                     res[data[e][1]]= eval(s)
                 else:
-                    print(("THIS IS FUCKED:%s, %i" % (e,i)))
+                    print ("THIS IS FUCKED:%s, %i" % (e,i))
 
 util.jdumpfile(res,'.subopt_cache') 
 

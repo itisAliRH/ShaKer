@@ -16,7 +16,7 @@ def read_genes():
     '''return {transcript_id:[(genestart,stop),...]}'''
     res=defaultdict(list)
     with open(datapath+"genes.txt", "r") as g:
-        next(g)
+        g.next()
         for e in g:
             assert "," in e
             name, Gstart, Gend, Tstart, Tend, idx =  e.strip().split(',')
@@ -38,7 +38,7 @@ def removegenes(gen, dbn, rea, lencutoff=10):
     ''' returns {seqname:react} and [seqname, seq]'''
     res_react = {}
     res_dbn = []
-    k=list(gen.keys())
+    k=gen.keys()
     k.sort()
     for kk, (seqname,seq,_) in zip (k,dbn): # for all transcripts
         genelocations = [(0,0)]+gen[kk] # fake gene for edge case
@@ -60,7 +60,7 @@ def keepgenes(gen, dbn, rea, lencutoff=10):
     ''' returns {seqname:react} and [seqname, seq]'''
     res_react = {}
     res_dbn = []
-    k=list(gen.keys())
+    k=gen.keys()
     k.sort()
     for kk, (seqname,seq,_) in zip (k,dbn): # for all transcripts
         genelocations = gen[kk] # fake gene for edge case

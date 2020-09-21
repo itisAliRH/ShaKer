@@ -9,13 +9,13 @@ def getdata():
 data = getdata() 
 
 
-k = list(data.keys())
+k = data.keys()
 
 import sys
 import ShaKer.rna_tools.rnasubopt as so
 if __name__=="__main__":
     task = int(sys.argv[1])-1
-    print(so.rnasubopt(data[k[task]][1]))
+    print so.rnasubopt(data[k[task]][1])
 
 
 

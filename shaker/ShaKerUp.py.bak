@@ -1,7 +1,7 @@
 
 
-from . import rna_tools.rna_io as rio
-from . import simushape as sim
+import rna_tools.rna_io as rio
+import simushape as sim
 DEBUG = False
 
 
@@ -26,22 +26,22 @@ else:
 data = rio.get_all_data("data/weeks194_orig/incell.react","data/weeks194_orig/incell.dbn") 
 # {key: rea, seq, stru}
 
-from .rna_tools.rnafold import fold
+from rna_tools.rnafold import fold
 def preproc(data,keys):
     for k in keys:
         data[k]= (data[k][0],data[k][1], fold(data[k][1],data[k][0]))
-        print(".", end=' ')
+        print ".",
     return data
 
 # TRAIN MODEL 
 if DEBUG:
-    data = preproc(data,list(data.keys())[4:6])
-    model  = sim.make_model(data,list(data.keys())[4:6]) 
+    data = preproc(data,data.keys()[4:6])
+    model  = sim.make_model(data,data.keys()[4:6]) 
 else: 
-    data = preproc(data,list(data.keys()))
-    model  = sim.make_model(data,list(data.keys()))
+    data = preproc(data,data.keys())
+    model  = sim.make_model(data,data.keys())
 
-print("training done")
+print "training done"
 
 
 ######################
@@ -49,7 +49,7 @@ print("training done")
 ########################
 
 import os 
-from . import rna_tools.rnaplfold as plf
+import rna_tools.rnaplfold as plf
 
 # for all fasta files
 for X in os.listdir("fasta"):
@@ -61,7 +61,7 @@ for X in os.listdir("fasta"):
     # and run plfold 
     for  i,(rea,(_,seq)) in enumerate(zip(shapedata,fasta)):
         plf.call_vienna_plfold(seq,rea,L=100,W=150,u=150, seq_name= X[:-5]+"%d."%i)
-        print(".", end=' ')
+        print ".",
 
 
 

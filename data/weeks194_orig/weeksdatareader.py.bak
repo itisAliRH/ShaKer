@@ -11,7 +11,7 @@ prefix ="/home/montaser/ikea/mustoe_2018_DATA_SOFTWARE/Mustoe2018_data/"
 
 filename_to_genname = {}
 with open(prefix+"transcripts.txt","r") as f:
-    next(f) # first line is a table header
+    f.next() # first line is a table header
     for e in f:
         if "," in e:
             data = e.split(',')
@@ -40,7 +40,7 @@ def process_folder(foldername):
         #strutures    
         with open(prefix+"%s_structures/%s.ct" % (foldername,location),"r") as ss:
             structure = ""
-            next(ss)
+            ss.next()
             for s in ss:
                 if " " in s:
                     idx1, base, indx0, indx2, bp, indx11 =  s.strip().split()

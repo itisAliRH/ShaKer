@@ -36,7 +36,7 @@ def energy_to_proba(ensemble,other):
         #res = math.exp(-other/RT) / math.exp(-ensemble/RT)
         res = math.exp((-other+ensemble)/RT)
     except:
-        print(("energy to proba failed: other:%.100f ens: %.100f" % (other, ensemble)))
+        print("energy to proba failed: other:%.100f ens: %.100f" % (other, ensemble))
 
     return res
 

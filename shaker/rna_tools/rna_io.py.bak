@@ -9,10 +9,10 @@ def read_dbn(path):
         for e in text:
             a_thing = [thing for thing in e.split('\n') if len(thing) > 1]
             if len(a_thing)!=3:
-                print(("ERRER", a_thing ,e))
+                print("ERRER", a_thing ,e)
                 return
             if len(a_thing[1])!=len(a_thing[2]):
-                print(("ERRER", a_thing ,e))
+                print("ERRER", a_thing ,e)
                 return
             res.append(a_thing)
     return res
@@ -27,7 +27,7 @@ def read_fasta(path):
         for e in text:
             a_thing = [thing for thing in e.split('\n') if len(thing) > 1]
             if len(a_thing)!=2:
-                print(("ERRER", a_thing ,e))
+                print("ERRER", a_thing ,e)
                 return
             res.append(a_thing)
     return res
@@ -62,7 +62,7 @@ def combine_dbn_react(dbn,react):
         if len(re) == len(seq) == len(brack):
             res[name]= (re,seq,brack)
         else:
-            print(("data for '%s' is corrupted, ignoring..." % name))
+            print("data for '%s' is corrupted, ignoring..." % name)
     return res
 
 

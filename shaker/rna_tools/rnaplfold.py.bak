@@ -1,8 +1,8 @@
-from . import rna_io
+import rna_io
 import os
 import collections
 
-from .util import shexec
+from util import shexec
 import tempfile
 
 def rnaplfold(sequence, react=None):
@@ -41,7 +41,7 @@ def call_vienna_plfold(sequence, react=None, W=200, L=150,  u=1, seq_name=None):
 
     ret, error, out =  shexec(cmd)
     if ret != 0:
-        print("error:", error)
+        print "error:", error
     assert os.path.isfile(dp_file_name), "Error: Expected dp file: {} is not created!".format(dp_file_name)
     assert os.path.isfile(unp_file_name),"Error: Expected lunp file: {} is not created!".format(unp_file_name)
 

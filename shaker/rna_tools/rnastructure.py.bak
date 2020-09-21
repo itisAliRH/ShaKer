@@ -1,4 +1,4 @@
-from .util import shexec
+from util import shexec
 
 
 # this wraps the tool: rnastructure by soheila montaseri
@@ -14,7 +14,7 @@ def rnastructure_wrap(sequence):
 
 def rnastructure(seqname, fastafile, ctFile, return_energy=False):
         """call rnasubopt, return (dotbracket, energy)"""
-        print("Fold " + "%s" % seqname + " " + "%s" % ctFile)
+        print "Fold " + "%s" % seqname + " " + "%s" % ctFile
         retcode, err, out = shexec("Fold " + "%s" % seqname + " " + "%s" % ctFile)
 
         with open(fastafile, "r") as S:

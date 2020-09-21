@@ -39,20 +39,20 @@ def opti_forest(data, n_jobs=1,n_iter=10):
                   "bootstrap": [True],  # false conflicts with oob score thing
                   "oob_score": [False]}
 
-    X,y = getXY(data,list(data.keys()))
+    X,y = getXY(data,data.keys())
     blu = rsearch(model, param_distributions=param_dist, n_iter=n_iter,n_jobs=n_jobs)
     blu.fit(X, y)
-    print(blu.best_params_)
-    print(blu.best_score_)
+    print blu.best_params_
+    print blu.best_score_
 
 if __name__ == "__main__":
-    print("*"*80)
-    print("16")
+    print "*"*80
+    print "16"
     data= quickloaddata('16')
     opti_forest(data, n_jobs=24, n_iter=1000)
-    print("20")
+    print "20"
     data= quickloaddata('20')
     opti_forest(data, n_jobs=24, n_iter=1000)
-    print("36")
+    print "36"
     data= quickloaddata('36')
     opti_forest(data, n_jobs=24, n_iter=1000)

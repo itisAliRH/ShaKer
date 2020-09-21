@@ -16,10 +16,10 @@ def run_accuracy(data, keys,make_model=lambda: ss.make_xgbreg()):
 
 
     def get_str(seq):
-	for _, data_seq, db in list(data.values()):
+	for _, data_seq, db in data.values():
 	    if seq == data_seq:
 		return [db]
-	print("SHIT")
+	print "SHIT"
 
     predictions = { k:(data[k][1],data[k][2],v) for v,k  in zip(  ss.crosspredict_nfold(data,keys, model=make_model() ) , keys) }
     predictions_str = { k:(data[k][1],data[k][2],v) for v,k in zip(  ss.crosspredict_nfold(data,keys,seq_to_db_function=get_str, model=make_model()) , keys)}
@@ -32,8 +32,8 @@ def run_accuracy(data, keys,make_model=lambda: ss.make_xgbreg()):
     acc_noshape = {k: get_structure_accuracy(data[k][1],data[k][2],None)  for  k in keys}
 
     index= ['suko',"shaker","shaker_plain",'real',"no_shape"]
-    data = [[x[k] for k in keys] for x in [acc_suko, acc_shaker,acc_shaker_plain, acc_real, acc_noshape]]
-    list(map(lambda x:x.append(np.mean(x)),data))
+    data = map(lambda x: [x[k] for k in keys] ,[acc_suko, acc_shaker,acc_shaker_plain, acc_real, acc_noshape])
+    map(lambda x:x.append(np.mean(x)),data)
     df = pandas.DataFrame(data, columns=keys+['mean'], index=index).T
     return df
 
@@ -61,7 +61,7 @@ tasks = [(ty,mo) for ty in types for mo in models ]
 def run(id):
     datum , mod = tasks[id]
     data= getdata(datum)
-    keys=list(data.keys())[:9]
+    keys=data.keys()[:9]
     ret = run_accuracy(data,keys,make_model=mod)
     with open("%d.accu.out" % id, "w") as f: f.write(ret.to_latex())
 

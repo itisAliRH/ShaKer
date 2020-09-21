@@ -34,10 +34,10 @@ def funmap(f,args):
 
 
 def opti_eden(data,r,d):
-    names= list(data.keys())
+    names= data.keys()
     res= [ calc( remove(names,item), data , item,r,d) for item in names ]
     mederror= np.array(res).mean()
-    print("r=%d d=%d res=%.2f\n\n" % (r,d, mederror))
+    print "r=%d d=%d res=%.2f\n\n" % (r,d, mederror)
 
 
 def optimize_eden_multi(data, jobs=4):
